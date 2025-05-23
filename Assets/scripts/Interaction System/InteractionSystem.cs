@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 
 public class InteractionSystem : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float interactionDistance = 5f;
     [SerializeField] private KeyCode interactionKey = KeyCode.E;
-    [SerializeField] private LayerMask interactionLayer;
+    [SerializeField] private string interactionTag = "Interactable"; // <--- use tag instead of layer
 
     private Camera cam;
     private Outline currentOutline;
     private GameObject currentObject;
+    private PuzzleInteractable currentInteractable;
 
     void Start()
     {
@@ -19,13 +20,11 @@ public class InteractionSystem : MonoBehaviour
     void Update()
     {
         HandleRaycast();
+
         if (Input.GetKeyDown(interactionKey))
         {
             TryInteract();
         }
-
-        Debug.Log("Interaction system is running");
-
     }
 
     void HandleRaycast()
@@ -33,55 +32,60 @@ public class InteractionSystem : MonoBehaviour
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayer))
+        if (Physics.Raycast(ray, out hit, interactionDistance))
         {
             GameObject hitObject = hit.collider.gameObject;
+
+            // Only proceed if the object has the correct tag
+            if (!hitObject.CompareTag(interactionTag))
+            {
+                ClearOutline();
+                return;
+            }
+
             Outline outline = hitObject.GetComponent<Outline>();
+            PuzzleInteractable interactable = hitObject.GetComponent<PuzzleInteractable>();
 
             if (outline != null)
             {
                 if (currentOutline != outline)
                 {
                     ClearOutline();
+
                     currentOutline = outline;
                     currentObject = hitObject;
+                    currentInteractable = interactable;
+
                     currentOutline.enabled = true;
+
+                    if (currentInteractable != null)
+                        currentInteractable.ShowInteractionUI();
                 }
                 return;
             }
         }
-        if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayer))
-        {
-            Debug.Log("Ray hit: " + hit.collider.name);
-        }
-        else
-        {
-            Debug.Log("Ray hit nothing");
-        }
-
 
         ClearOutline();
     }
 
     void TryInteract()
     {
-        if (currentObject != null)
+        if (currentInteractable != null)
         {
-            IInteractable interactable = currentObject.GetComponent<IInteractable>();
-            if (interactable != null)
-            {
-                interactable.Interact();
-            }
+            currentInteractable.Interact();
         }
     }
 
     void ClearOutline()
     {
         if (currentOutline != null)
-        {
             currentOutline.enabled = false;
-            currentOutline = null;
-            currentObject = null;
-        }
+
+        if (currentInteractable != null)
+            currentInteractable.HideInteractionUI();
+
+        currentOutline = null;
+        currentObject = null;
+        currentInteractable = null;
     }
-}
+}*/

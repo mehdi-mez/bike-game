@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3358489955427400392}
   - component: {fileID: 2624635722459175389}
   - component: {fileID: 720985967945282238}
+  - component: {fileID: 7205617482950017924}
+  - component: {fileID: 7373506941775703893}
   m_Layer: 0
   m_Name: the palm tree
   m_TagString: Untagged
@@ -53,15 +55,15 @@ LODGroup:
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.82544637
+  - screenRelativeHeight: 0.999
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4893457199698196851}
-  - screenRelativeHeight: 0.3
+  - screenRelativeHeight: 0.9075293
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4274682849711797563}
-  - screenRelativeHeight: 0.1
+  - screenRelativeHeight: 0.19816671
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 7441440155414888176}
@@ -108,6 +110,48 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 12.610001, z: 1}
   m_Center: {x: 0, y: 5.5, z: 0}
+--- !u!65 &7205617482950017924
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5047018410104040434}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 12.610001, z: 1}
+  m_Center: {x: 0, y: 5.5, z: 0}
+--- !u!65 &7373506941775703893
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5047018410104040434}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 11.610001, z: 1}
+  m_Center: {x: 0, y: 6, z: 0}
 --- !u!1001 &3211960190343850431
 PrefabInstance:
   m_ObjectHideFlags: 0

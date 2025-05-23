@@ -8,9 +8,7 @@ public class BikeMountManager : MonoBehaviour
     public MonoBehaviour bikeController;
     public Transform dismountPoint;
 
-    // This script is on the bike camera
     private BikeFirstPersonLook bikeLook;
-
     private bool isMounted = false;
 
     void Start()
@@ -21,7 +19,6 @@ public class BikeMountManager : MonoBehaviour
 
     void Update()
     {
-        // Press Left Control to dismount
         if (isMounted && Input.GetKeyDown(KeyCode.LeftControl))
         {
             DismountBike();
@@ -32,7 +29,17 @@ public class BikeMountManager : MonoBehaviour
     {
         if (isMounted) return;
 
-        player.SetActive(false);
+        // Just freeze movement & interaction
+        var controller = player.GetComponent<CharacterController>();
+        if (controller != null) controller.enabled = false;
+
+        var interaction = player.GetComponent<PlayerInteractions>();
+        if (interaction != null) interaction.enabled = false;
+
+        // Optionally hide player visuals
+        foreach (var r in player.GetComponentsInChildren<Renderer>())
+            r.enabled = false;
+
         playerCamera.gameObject.SetActive(false);
         bikeCamera.gameObject.SetActive(true);
 
@@ -52,7 +59,16 @@ public class BikeMountManager : MonoBehaviour
         player.transform.position = dismountPoint.position;
         player.transform.rotation = dismountPoint.rotation;
 
-        player.SetActive(true);
+
+        var controller = player.GetComponent<CharacterController>();
+        if (controller != null) controller.enabled = true;
+
+        var interaction = player.GetComponent<PlayerInteractions>();
+        if (interaction != null) interaction.enabled = true;
+
+        foreach (var r in player.GetComponentsInChildren<Renderer>())
+            r.enabled = true;
+
         playerCamera.gameObject.SetActive(true);
         bikeCamera.gameObject.SetActive(false);
 
@@ -70,3 +86,4 @@ public class BikeMountManager : MonoBehaviour
         return isMounted;
     }
 }
+

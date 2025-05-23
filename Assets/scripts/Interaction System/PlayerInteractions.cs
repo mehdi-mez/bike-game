@@ -10,16 +10,31 @@ public class PlayerInteractions : MonoBehaviour
 
     void Update()
     {
-        CheckInteractions();
-
-
-        if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (currentInteractable is Interactable i)
-                i.Interact();
-            else if (currentInteractable is PuzzleInteractable p)
-                p.Interact();
+            if (currentInteractable != null)
+            {
+                if (currentInteractable is Interactable i)
+                    i.Interact();
+                else if (currentInteractable is PuzzleInteractable p)
+                    p.Interact();
+            }
+            else
+            {
+                // Check if looking at a bike with BikeMountManager
+                Ray ray = new Ray(transform.position, transform.forward);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, playerReach))
+                {
+                    var bike = hit.collider.GetComponent<BikeMountManager>();
+                    if (bike != null && !bike.IsMounted())
+                    {
+                        bike.MountBike();
+                    }
+                }
+            }
         }
+
     }
 
     void CheckInteractions()

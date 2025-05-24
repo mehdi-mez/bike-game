@@ -206,35 +206,39 @@ public class BicycleVehicle : MonoBehaviour
 	}
 }
 
+#if UNITY_EDITOR
+
 #region CustomInspector
+
 [CustomEditor(typeof(BicycleVehicle))]
-//We need to extend the Editor
-public class BicycleInspector :  Editor
+public class BicycleInspector : Editor
 {
-	//Here we grab a reference to our component
-	BicycleVehicle bicycle;
+    BicycleVehicle bicycle;
 
-	private void OnEnable()
-	{
-		//target is by default available for you in Editor		
-		bicycle = target as BicycleVehicle;
-	}
+    private void OnEnable()
+    {
+        bicycle = target as BicycleVehicle;
+    }
 
-	//Here is the meat of the script
-	public override void OnInspectorGUI()
-	{
-		SetLabel("Bicycle System", 30, FontStyle.Bold, TextAnchor.UpperLeft);		
-		SetLabel("Love from RayznGames", 12, FontStyle.Italic, TextAnchor.UpperRight);		
-		base.OnInspectorGUI();		
-	}
-	void SetLabel(string title, int size, FontStyle style,TextAnchor alignment) 
-	{
-		GUI.skin.label.alignment = alignment;
-		GUI.skin.label.fontSize = size;
-		GUI.skin.label.fontStyle = FontStyle.Bold;
-		GUILayout.Label(title);
-	}
+    public override void OnInspectorGUI()
+    {
+        SetLabel("Bicycle System", 30, FontStyle.Bold, TextAnchor.UpperLeft);
+        SetLabel("Love from RayznGames", 12, FontStyle.Italic, TextAnchor.UpperRight);
+        base.OnInspectorGUI();
+    }
+
+    void SetLabel(string title, int size, FontStyle style, TextAnchor alignment)
+    {
+        GUI.skin.label.alignment = alignment;
+        GUI.skin.label.fontSize = size;
+        GUI.skin.label.fontStyle = FontStyle.Bold;
+        GUILayout.Label(title);
+    }
 }
+
+#endregion
+#endif
+
 /*
 		GUI.skin.label.alignment = TextAnchor.UpperRight;
 		GUI.skin.label.fontSize = 12;
@@ -248,4 +252,4 @@ public class BicycleInspector :  Editor
 		EditorGUI.indentLevel--;
  */
 
-#endregion
+

@@ -68,7 +68,11 @@ public class PlayerMovement : MonoBehaviour
             runSpeed = 12f;
         }
 
-        characterController.Move(moveDirection * Time.deltaTime);
+        if (characterController != null && characterController.enabled)
+        {
+            characterController.Move(moveDirection * Time.deltaTime);
+        }
+
 
         if (canMove)
         {
